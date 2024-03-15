@@ -1741,8 +1741,8 @@ implementation
 
 	procedure ConOpt2Con (var key: char);
 		const
-			theOptionKeys = 'å∫ç∂´ƒ©˙ˆ∆˚¬µ˜øπœ®ß†¨√∑≈¥Ω';
-			capsOptionKeys = 'ÅıÇÎ´Ï©ÓˆÔ˚ÒÂ˜Ø∏Œ®Í†¨√∑≈ÁΩ';
+			theOptionKeys = 'å∫ç∂´ƒ©˙ˆ∆˚¬µ˜øπœ®ß†¨√∑≈¥Ω';
+			capsOptionKeys = 'ÅıÇÎ´Ï©ÓˆÔ˚ÒÂ˜Ø∏Œ®Í†¨√∑≈ÁΩ';
 		var
 			i: integer;
 	begin
