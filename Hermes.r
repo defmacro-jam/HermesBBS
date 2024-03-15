@@ -15349,8 +15349,10 @@ resource 'FREF' (132) {
 	""
 };
 
-data 'FREF' (133) {
-	$"4D4F 4452 0005 7F"                                  /* MODR... */
+resource 'FREF' (133) {
+	'MODR',
+	5,
+	""
 };
 
 data 'HRMS' (0, "Owner resource") {
