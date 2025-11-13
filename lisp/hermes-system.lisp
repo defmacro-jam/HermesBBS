@@ -13,6 +13,7 @@
    (:file "packages")
    (:file "utilities" :depends-on ("packages"))
    (:file "toolbox-wrappers" :depends-on ("utilities"))
+   (:file "storage" :depends-on ("toolbox-wrappers" "utilities"))
    (:file "init" :depends-on ("utilities"))
    (:file "preferences" :depends-on ("utilities"))
    (:file "networking" :depends-on ("toolbox-wrappers" "utilities" "preferences"))
