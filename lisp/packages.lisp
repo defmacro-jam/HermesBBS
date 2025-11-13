@@ -85,3 +85,17 @@
         :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox)
   (:export #:start-hermes
            #:request-hermes-shutdown))
+
+(defpackage :hermes.storage
+  (:use :cl :ccl :hermes.common)
+  (:export #:pascal-layout
+           #:record-byte-size
+           #:serialize-record
+           #:deserialize-record
+           #:with-legacy-file
+           #:read-legacy-records
+           #:write-legacy-record
+           #:read-resource-record
+           #:write-resource-record
+           #:*legacy-caches*
+           #:warm-legacy-caches))
