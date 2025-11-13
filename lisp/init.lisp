@@ -1,0 +1,20 @@
+(in-package :hermes.init)
+
+(defun bootstrap-initial-files ()
+  (with-hermes-log ()
+    (format t "Bootstrapping Hermes initial files...~%"))
+  (let ((initial-files '("Initial" "CreateNewFiles" "LoadAndSave")))
+    (dolist (component initial-files)
+      (with-hermes-log ()
+        (format t "Preparing ~A component.~%" component))))
+  (initialize-databases)
+  (prime-message-stores))
+
+(defun initialize-databases ()
+  (with-hermes-log ()
+    (format t "Initializing Hermes databases.~%"))
+  (seed-global-state))
+
+(defun prime-message-stores ()
+  (with-hermes-log ()
+    (format t "Priming message stores for Hermes sessions.~%")))
