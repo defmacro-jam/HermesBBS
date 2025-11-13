@@ -87,10 +87,62 @@
            #:write-resource-record
            #:*legacy-caches*
            #:warm-legacy-caches
-           #:user-record))
+           #:user-record
+           #:system-record
+           #:forum-record
+           #:conference-record
+           #:message-record
+           #:email-record
+           #:message-forum-table
+           #:conference-table
+           #:security-level-entry
+           #:security-level-table))
+
+(defpackage :hermes.messages
+  (:use :cl :ccl :hermes.common :hermes.utilities)
+  (:import-from :hermes.storage
+                #:*legacy-caches*
+                #:system-record
+                #:system-record-messages-path
+                #:system-record-message-forum-count
+                #:system-record-use-quote-header
+                #:system-record-quote-header
+                #:system-record-quote-header-anonymous
+                #:system-record-quote-header-options
+                #:message-forum-table
+                #:message-forum-table-forums
+                #:forum-record
+                #:forum-record-name
+                #:conference-table
+                #:conference-table-conferences
+                #:conference-record
+                #:conference-record-name
+                #:message-record
+                #:message-record-title
+                #:message-record-from-user-name
+                #:message-record-to-user-name
+                #:message-record-anonymous-from
+                #:message-record-stored-as
+                #:message-record-date-entered
+                #:email-record
+                #:security-level-table
+                #:security-level-table-levels
+                #:security-level-entry
+                #:security-level-entry-post-ratio
+                #:user-record
+                #:user-record-sl
+                #:user-record-messages-posted
+                #:user-record-total-logons)
+  (:export #:open-message-store
+           #:read-message-body
+           #:append-message-body
+           #:delete-message-body
+           #:quote-message
+           #:post-ratio-ok-p
+           #:delete-attachment))
 
 (defpackage :hermes.ui
-  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities)
+  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities :hermes.messages)
   (:import-from :hermes.storage
                 #:user-record
                 #:serialize-record
@@ -109,6 +161,6 @@
 
 (defpackage :hermes.main
   (:use :cl :ccl :hermes.common :hermes.utilities :hermes.init
-        :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox)
+        :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox :hermes.messages)
   (:export #:start-hermes
            #:request-hermes-shutdown))
