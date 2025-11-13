@@ -4,7 +4,9 @@
 (when *load-truename*
   (let* ((script-path *load-truename*)
          (script-dir (make-pathname :name nil :type nil :defaults script-path))
-         (repo-root (truename (merge-pathnames #P"../" script-dir))))
+         ;; Move from lisp/tests/ to repository root by going up two
+         ;; directories.
+         (repo-root (truename (merge-pathnames #P"../../" script-dir))))
     (setf *default-pathname-defaults* repo-root)))
 
 (load "lisp/hermes-system.lisp")
