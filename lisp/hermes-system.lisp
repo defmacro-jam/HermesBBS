@@ -21,7 +21,8 @@
    (:file "networking" :depends-on ("toolbox-wrappers" "utilities" "preferences"))
    (:file "terminal-view" :depends-on ("toolbox-wrappers" "utilities" "storage" "file-areas"))
    (:file "ui" :depends-on ("toolbox-wrappers" "utilities" "storage" "messages" "terminal-view" "file-areas"))
-   (:file "main" :depends-on ("init" "preferences" "networking" "ui" "toolbox-wrappers" "utilities" "messages"))))
+   (:file "test-harness" :depends-on ("utilities" "storage" "networking" "messages"))
+   (:file "main" :depends-on ("init" "preferences" "networking" "ui" "toolbox-wrappers" "utilities" "messages" "test-harness"))))
 
 (defun load-hermes-bbs ()
   (ccl:load-system :hermes-bbs))

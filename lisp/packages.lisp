@@ -204,6 +204,30 @@
            #:set-terminal-font
            #:terminal-buffer-contents))
 
+(defpackage :hermes.tests
+  (:use :cl :ccl :hermes.common :hermes.utilities :hermes.storage :hermes.networking :hermes.messages)
+  (:export #:workflow-event
+           #:workflow-event-type
+           #:workflow-event-payload
+           #:make-workflow-event
+           #:workflow-script
+           #:workflow-script-name
+           #:workflow-script-events
+           #:make-workflow-script
+           #:workflow-context
+           #:make-workflow-context
+           #:workflow-context-state
+           #:workflow-context-transcript
+           #:workflow-transcript-entries
+           #:register-workflow-handler
+           #:execute-workflow-script
+           #:make-login-event
+           #:make-message-post-event
+           #:make-telnet-negotiation-event
+           #:make-core-workflow-script
+           #:run-core-workflow-script
+           #:run-core-workflows))
+
 (defpackage :hermes.main
   (:use :cl :ccl :hermes.common :hermes.utilities :hermes.init
         :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox :hermes.messages)
