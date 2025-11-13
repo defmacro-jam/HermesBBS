@@ -74,18 +74,6 @@
            #:start-modem-service
            #:shutdown-networking))
 
-(defpackage :hermes.ui
-  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities)
-  (:export #:initialize-ui
-           #:display-splash
-           #:refresh-session-windows))
-
-(defpackage :hermes.main
-  (:use :cl :ccl :hermes.common :hermes.utilities :hermes.init
-        :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox)
-  (:export #:start-hermes
-           #:request-hermes-shutdown))
-
 (defpackage :hermes.storage
   (:use :cl :ccl :hermes.common)
   (:export #:pascal-layout
@@ -98,4 +86,29 @@
            #:read-resource-record
            #:write-resource-record
            #:*legacy-caches*
-           #:warm-legacy-caches))
+           #:warm-legacy-caches
+           #:user-record))
+
+(defpackage :hermes.ui
+  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities)
+  (:import-from :hermes.storage
+                #:user-record
+                #:serialize-record
+                #:deserialize-record)
+  (:export #:initialize-ui
+           #:display-splash
+           #:refresh-session-windows
+           #:make-user-editor-dialog
+           #:make-user-list-dialog
+           #:make-user-search-dialog
+           #:find-control
+           #:handle-dialog-event
+           #:compile-search-criteria
+           #:filter-user-list
+           #:run-user-dialog-scenarios))
+
+(defpackage :hermes.main
+  (:use :cl :ccl :hermes.common :hermes.utilities :hermes.init
+        :hermes.preferences :hermes.networking :hermes.ui :hermes.toolbox)
+  (:export #:start-hermes
+           #:request-hermes-shutdown))
