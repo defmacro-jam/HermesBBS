@@ -851,6 +851,39 @@
     ()
   (levels (:array 255 (:struct security-level-entry))))
 
+(define-pascal-record file-entry-record
+    ()
+  (fl-name (:pascal-string 31)
+           :documentation "Display name used in file listings.")
+  (real-f-name (:pascal-string 255)
+               :documentation "Absolute path to the file on the host system.")
+  (fl-desc (:pascal-string 78)
+           :documentation "Short textual description for listings.")
+  (when-ul :int32
+           :documentation "Upload timestamp expressed as Mac seconds since 1904.")
+  (uploader-num :int16
+                :documentation "Numeric ID of the uploader, zero for unknown.")
+  (num-dloads :int16
+              :documentation "Number of recorded downloads.")
+  (byte-len :int32
+            :documentation "Size of the file in bytes.")
+  (has-extended :boolean
+                :documentation "True when extended descriptions are present.")
+  (file-stat :char
+             :documentation "Status flag controlling visibility (e.g. hidden).")
+  (last-dl :int32
+           :documentation "Timestamp of last download in Mac seconds.")
+  (version (:pascal-string 10)
+           :documentation "Optional version tag supplied by the uploader.")
+  (file-type (:pascal-string 4)
+             :documentation "Mac file type code.")
+  (file-creator (:pascal-string 4)
+                :documentation "Mac creator code for the file.")
+  (file-number :int32
+               :documentation "Sequential identifier used in transfer areas.")
+  (reserved (:reserved 52)
+            :documentation "Unused padding matching the Pascal structure."))
+
 (define-pascal-record feedback-record
     ()
   (count :int16)

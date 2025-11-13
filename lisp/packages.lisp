@@ -96,7 +96,43 @@
            #:message-forum-table
            #:conference-table
            #:security-level-entry
-           #:security-level-table))
+           #:security-level-table
+           #:file-entry-record
+           #:file-entry-record-fl-name
+           #:file-entry-record-real-f-name
+           #:file-entry-record-fl-desc
+           #:file-entry-record-when-ul
+           #:file-entry-record-uploader-num
+           #:file-entry-record-num-dloads
+           #:file-entry-record-byte-len
+           #:file-entry-record-has-extended
+           #:file-entry-record-file-stat
+           #:file-entry-record-last-dl
+           #:file-entry-record-version
+           #:file-entry-record-file-type
+           #:file-entry-record-file-creator
+           #:file-entry-record-file-number))
+
+(defpackage :hermes.file-areas
+  (:use :cl :ccl :hermes.common :hermes.storage :hermes.utilities)
+  (:export #:generic-shell-sort
+           #:sort-file-entries
+           #:file-ok-mask
+           #:directory-context
+           #:directory-context-path
+           #:directory-context-entries
+           #:directory-context-position
+           #:directory-context-mask
+           #:directory-context-after-date
+           #:directory-context-audience
+           #:open-directory
+           #:close-directory
+           #:directory-next-file
+           #:reset-directory
+           #:with-directory
+           #:collect-directory-entries
+           #:sysop-directory-command
+           #:remote-directory-command))
 
 (defpackage :hermes.messages
   (:use :cl :ccl :hermes.common :hermes.utilities)
@@ -142,7 +178,7 @@
            #:delete-attachment))
 
 (defpackage :hermes.ui
-  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities :hermes.messages)
+  (:use :cl :ccl :hermes.common :hermes.toolbox :hermes.utilities :hermes.messages :hermes.file-areas)
   (:import-from :hermes.storage
                 #:user-record
                 #:serialize-record
@@ -157,7 +193,16 @@
            #:handle-dialog-event
            #:compile-search-criteria
            #:filter-user-list
-           #:run-user-dialog-scenarios))
+           #:run-user-dialog-scenarios
+           #:ansi-terminal-view
+           #:make-ansi-terminal-view
+           #:reset-terminal
+           #:write-terminal-character
+           #:write-terminal-string
+           #:terminal-selection-text
+           #:set-terminal-palette
+           #:set-terminal-font
+           #:terminal-buffer-contents))
 
 (defpackage :hermes.main
   (:use :cl :ccl :hermes.common :hermes.utilities :hermes.init
