@@ -13,6 +13,13 @@
            #:*background-processes*
            #:ensure-hermes-state
            #:hermes-state
+           #:hermes-state-startup-time
+           #:hermes-state-resource-files
+           #:hermes-state-shutdown-hooks
+           #:hermes-state-global-seed
+           #:hermes-state-random-state
+           #:hermes-state-network-ready-p
+           #:hermes-state-running-p
            #:*hermes-state*
            #:update-hermes-state))
 
