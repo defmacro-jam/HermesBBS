@@ -1,10 +1,5 @@
 (in-package :cl-user)
 
-#-ccl
-(eval-when (:compile-toplevel :load-toplevel :execute)
-  (load (merge-pathnames #P"compat.lisp" *load-truename*)))
-
-#+ccl
 (eval-when (:compile-toplevel :load-toplevel :execute)
   (require "DEFsystem"))
 
@@ -15,7 +10,6 @@
 (ccl:defsystem :hermes-bbs
   (:default-pathname #P"lisp/")
   (:components
-   (:file "compat")
    (:file "packages")
    (:file "utilities" :depends-on ("packages"))
    (:file "toolbox-wrappers" :depends-on ("utilities"))

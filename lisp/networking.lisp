@@ -25,7 +25,6 @@
   (setf *modem-session* driver)
   (with-hermes-log ()
     (format t "Starting modem service via driver ~A.~%" driver))
-  #+ccl
   (ignore-errors (ccl:errchk (#_OpenDriver driver)))
   (register-scheduled-task :modem-poll
                            (lambda ()

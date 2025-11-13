@@ -5,18 +5,15 @@
    (type :initarg :type :accessor process-type)
    (name :initarg :name :accessor process-name)))
 
-#+ccl
 (defun %psn->list (psn-ptr)
   (list (ccl:rref psn-ptr :processserialnumber.highlongofpsn)
         (ccl:rref psn-ptr :processserialnumber.lowlongofpsn)))
 
-#+ccl
 (defun %process-name (psn-ptr)
   (format nil "PSN-~8,'0X:~8,'0X"
           (ccl:rref psn-ptr :processserialnumber.highlongofpsn)
           (ccl:rref psn-ptr :processserialnumber.lowlongofpsn)))
 
-#+ccl
 (defun list-processes ()
   (ccl:rlet ((psn :processserialnumber))
     (let ((results '()))
@@ -31,22 +28,9 @@
             (return)))
         (nreverse results)))))
 
-#+ccl
 (defun find-process-by-name (name)
   (find name (list-processes) :key #'process-name :test #'string-equal))
 
-#-ccl
-(defun list-processes ()
-  (list (make-instance 'process-info
-                       :serial-number '(0 0)
-                       :type :application
-                       :name "Hermes SBCL")))
-
-#-ccl
-(defun find-process-by-name (name)
-  (find name (list-processes) :key #'process-name :test #'string-equal))
-
-#+ccl
 (defmacro with-apple-event-handler ((event-class event-id handler &key (system-target nil)) &body body)
   `(let ((descriptor (ccl:make-routine-descriptor ,handler :appleevent-handler)))
      (#_AEInstallEventHandler ,event-class ,event-id descriptor 0 ,system-target)
@@ -54,40 +38,18 @@
        (#_AERemoveEventHandler ,event-class ,event-id descriptor ,system-target)
        (ccl:dispose-routine-descriptor descriptor))))
 
-#+ccl
 (defun make-apple-event (target event-class event-id &key (return-id 0) (transaction-id 0))
   (let ((event (ccl:make-record :appleevent)))
     (ccl:errchk (#_AECreateAppleEvent event-class event-id target return-id transaction-id event))
     event))
 
-#+ccl
 (defun dispatch-apple-event (event)
   (ccl:errchk (#_AEDispatchAppleEvent event (#_NewAEEventHandlerUPP #'ccl:event-dispatch) 0)))
 
-#+ccl
 (defun install-apple-event-handlers (handlers)
   (dolist (entry handlers)
     (destructuring-bind (event-class event-id function) entry
       (#_AEInstallEventHandler event-class event-id (ccl:make-routine-descriptor function :appleevent-handler) 0 nil))))
-
-#-ccl
-(defmacro with-apple-event-handler ((event-class event-id handler &key (system-target nil)) &body body)
-  (declare (ignore event-class event-id handler system-target))
-  `(progn ,@body))
-
-#-ccl
-(defun make-apple-event (target event-class event-id &key (return-id 0) (transaction-id 0))
-  (declare (ignore target return-id transaction-id))
-  (list :event-class event-class :event-id event-id))
-
-#-ccl
-(defun dispatch-apple-event (event)
-  event)
-
-#-ccl
-(defun install-apple-event-handlers (handlers)
-  (declare (ignore handlers))
-  nil)
 
 (defparameter *scheduled-tasks* (make-hash-table :test #'equal))
 
@@ -111,7 +73,7 @@
   (with-hermes-log ()
     (format t "Ensuring MacTCP stack is initialized for Telnet and modem sessions.~%"))
   (unless (gethash :mactcp *scheduled-tasks*)
-    #+ccl (ccl:errchk (#_OpenDriver :|.IPP|))
+    (ccl:errchk (#_OpenDriver :|.IPP|))
     (setf (gethash :mactcp *scheduled-tasks*) t)))
 
 (defun open-tcp-stream (host port)
