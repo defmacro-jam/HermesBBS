@@ -17,7 +17,7 @@
    (:file "init" :depends-on ("utilities"))
    (:file "preferences" :depends-on ("utilities"))
    (:file "networking" :depends-on ("toolbox-wrappers" "utilities" "preferences"))
-   (:file "ui" :depends-on ("toolbox-wrappers" "utilities"))
+   (:file "ui" :depends-on ("toolbox-wrappers" "utilities" "storage"))
    (:file "main" :depends-on ("init" "preferences" "networking" "ui" "toolbox-wrappers" "utilities"))))
 
 (defun load-hermes-bbs ()
